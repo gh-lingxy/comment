@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)https://www.lingxy.com -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>LNMP一键安装包无人值守命令生成器 - 凌小云</title>
+  <meta name="author" content="Licess">
+  <meta name="keywords" content="LNMP一键安装包无人值守命令生成器,lnmp无人值守,lnmp自动安装,无人值守">
+  <meta name="description" content="LNMP一键安装包无人值守命令生成器可以为您方便的生成lnmp无人值守安装命令参数">
+  <script type="text/javascript" src="./LNMP一键安装包无人值守命令生成器_files/jquery.min.js.下载"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    //window.alert($("#Stack").val())
+    var Stack=$("#Stack").val();
+	var DBSelect=$("#DBSelect").val()
+	if (DBSelect == "0") {
+	  DBOPT=" DBSelect=\"0\"";
+	} else {
+	  DBOPT=" DBSelect=\"" + $("#DBSelect").val() + "\" DB_Root_Password=\"" + $("#DB_Root_Password").val() + "\" InstallInnodb=\"" + $("#InstallInnodb").val() + "\"";
+	}
+    if (Stack == "lnmp") {
+    $("#result").text("wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && LNMP_Auto=\"y\"" + DBOPT + " PHPSelect=\"" + $("#PHPSelect").val() + "\" SelectMalloc=\"" + $("#SelectMalloc").val() + "\"" + " ./install.sh lnmp");} else if (Stack == "lnmpa") {
+	$("#result").text("wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && LNMP_Auto=\"y\"" + DBOPT + " PHPSelect=\"" + $("#PHPSelect").val() + "\" SelectMalloc=\"" + $("#SelectMalloc").val() + "\" ApacheSelect=\"" + $("#ApacheSelect").val() + "\" ServerAdmin=\"" + $("#ServerAdmin").val() + "\" ./install.sh lnmpa");} else if  (Stack == "lamp") {
+	$("#result").text("wget http://soft.vpser.net/lnmp/lnmp1.5.tar.gz -cO lnmp1.5.tar.gz && tar zxf lnmp1.5.tar.gz && cd lnmp1.5 && LNMP_Auto=\"y\"" + DBOPT + " PHPSelect=\"" + $("#PHPSelect").val() + "\" SelectMalloc=\"" + $("#SelectMalloc").val() + "\" ApacheSelect=\"" + $("#ApacheSelect").val() + "\" ServerAdmin=\"" + $("#ServerAdmin").val() + "\" ./install.sh lamp");}
+  });
+});
+</script>
+<style type="text/css">
+<!--
+body {
+color:#333333;
+font-family:"Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+}
+.links {color: #009900}
+#main {
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    width: 80%;
+}
+-->
+</style>
+</head>
+
+<body>
+<div id="main">
+    <div>
+        <div>
+		<label><b>架构模式选择</b></label>
+            <select name="Stack" id="Stack">
+                <option value="lnmp" selected="">LNMP</option>
+                <option value="lamp">LAMP</option>
+                <option value="lnmpa">LNMPA</option>
+            </select>
+        </div>
+		<div>
+        <label><b>MySQL版本</b></label>
+            <select name="DBSelect" id="DBSelect">
+                <option value="1">MySQL 5.1</option>
+                <option value="2" selected="">MySQL 5.5</option>
+                <option value="3">MySQL 5.6</option>
+				<option value="4">MySQL 5.7</option>
+				<option value="5">MySQL 8.0</option>
+				<option value="6">MariaDB 5.5</option>
+				<option value="7">MariaDB 10.0</option>
+				<option value="8">MariaDB 10.1</option>
+				<option value="9">MariaDB 10.2</option>
+				<option value="0">不安装数据库</option>
+            </select>
+        </div>
+        <div>
+            <label><b>是否启用InnoDB</b></label>
+            <select name="InstallInnodb" id="InstallInnodb">
+                <option value="y" selected="">是</option>
+                <option value="n">否</option>
+            </select>
+        </div>
+        <div>
+            <label><b>数据库Root用户密码</b></label>
+            <input name="DB_Root_Password" id="DB_Root_Password" type="text" value="lnmp.org">
+        </div>
+		<div>
+            <label><b>PHP版本</b></label>
+            <select name="PHPSelect" id="PHPSelect">
+                <option value="1">PHP 5.2</option>
+                <option value="2">PHP 5.3</option>
+                <option value="3">PHP 5.4</option>
+				<option value="4">PHP 5.5</option>
+				<option value="5" selected="">PHP 5.6</option>
+				<option value="6">PHP 7.0</option>
+				<option value="7">PHP 7.1</option>
+				<option value="8">PHP 7.2</option>
+            </select>
+        </div>
+		<div>
+            <label><b>内存分配器</b></label>
+            <select name="SelectMalloc" id="SelectMalloc">
+                <option value="1" selected="">不安装</option>
+                <option value="2">Jemalloc</option>
+                <option value="3">TCMalloc</option>
+            </select>
+        </div>
+		<div>
+            <label><b>Apache版本</b></label>(仅LNMPA及LAMP架构选择)
+            <select name="ApacheSelect" id="ApacheSelect">
+                <option value="1">Apache 2.2</option>
+                <option value="2" selected="">Apache 2.4</option>
+            </select>
+        </div>
+		<div>
+            <label><b>管理员邮箱</b></label>(仅LNMPA及LAMP架构选择)
+            <input name="ServerAdmin" id="ServerAdmin" type="text" value="webmaster@example.com">
+        </div>
+        <div>
+            <button type="button" id="button">生成</button>
+        </div>
+        <div>
+            <label>无人值守安装命令：</label>
+            <p id="result"></p>
+        </div>
+    </div> 
+</div>
+
+<div style="display:none"><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1257046989'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1257046989' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_1257046989"><a href="https://www.cnzz.com/stat/website.php?web_id=1257046989" target="_blank" title="站长统计">站长统计</a></span><script src="./LNMP一键安装包无人值守命令生成器_files/stat.php" type="text/javascript"></script><script src="./LNMP一键安装包无人值守命令生成器_files/core.php" charset="utf-8" type="text/javascript"></script></div>
+
+
+
+</body></html>
